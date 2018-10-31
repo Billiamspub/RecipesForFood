@@ -16,12 +16,14 @@ namespace RecipesForFood
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // AddSingleton or AddTransient or AddScoped
+            services.AddSingleton<IGreeter, Greeter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, 
                                 IHostingEnvironment env,
-                                IConfiguration configuration)
+                                IGreeter greeter)
         {
             if (env.IsDevelopment())
             {
@@ -30,7 +32,8 @@ namespace RecipesForFood
 
             app.Run(async (context) =>
             {
-                var appTitle = configuration["AppTitle"];
+                //var appTitle = configuration["AppTitle"];
+                var appTitle = greeter.GetTitleOfTheDay();
                 await context.Response.WriteAsync(appTitle);
             });
         }
