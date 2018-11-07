@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace RecipesForFood
 {
@@ -23,18 +24,49 @@ namespace RecipesForFood
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, 
                                 IHostingEnvironment env,
-                                IGreeter greeter)
+                                IGreeter greeter,
+                                ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
+                //env.EnvironmentName();
                 app.UseDeveloperExceptionPage();
             }
+            // middleware to look at incoming request and if for a directory will look for a default file; could specify with options parameter
+            //app.UseDefaultFiles();
+            //// middleware for allowing static files in www
+            //app.UseStaticFiles();
+            // does both of above with options parameter
+            app.UseFileServer();
+
+            //app.Use(next =>
+            //{
+            //    return async context =>
+            //    {
+            //        logger.LogInformation("Request incoming");
+            //        if (context.Request.Path.StartsWithSegments("/mym"))
+            //        {
+            //            await context.Response.WriteAsync("Hit!!!");
+            //            logger.LogInformation("Request handled");
+            //        }
+            //        else
+            //        {
+            //            await next(context);
+            //            logger.LogInformation("Response outgoing");
+            //        }
+            //    };
+            //});
+
+
+            //app.UseWelcomePage(new WelcomePageOptions {
+            //    Path="/wp"
+            //});
 
             app.Run(async (context) =>
-            {
+            {                
                 //var appTitle = configuration["AppTitle"];
                 var appTitle = greeter.GetTitleOfTheDay();
-                await context.Response.WriteAsync(appTitle);
+                await context.Response.WriteAsync($"{appTitle} : {env.EnvironmentName}");
             });
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace RecipesForFood
+﻿using Microsoft.Extensions.Configuration;
+
+namespace RecipesForFood
 {
     public interface IGreeter
     {
@@ -7,9 +9,15 @@
 
     public class Greeter : IGreeter
     {
+        private IConfiguration configuration;
+        public Greeter(IConfiguration _configuration)
+        {
+            configuration = _configuration;
+        }
         public string GetTitleOfTheDay()
         {
-            return "Greetings!";
+            //return "Greetings!";
+            return configuration["AppTitle"];
         }
     }
 }
