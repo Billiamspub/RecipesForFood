@@ -19,6 +19,7 @@ namespace RecipesForFood
         {
             // AddSingleton or AddTransient or AddScoped
             services.AddSingleton<IGreeter, Greeter>();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +38,10 @@ namespace RecipesForFood
             //// middleware for allowing static files in www
             //app.UseStaticFiles();
             // does both of above with options parameter
-            app.UseFileServer();
+            //app.UseFileServer();
+            app.UseStaticFiles();
+
+            app.UseMvcWithDefaultRoute();
 
             //app.Use(next =>
             //{
