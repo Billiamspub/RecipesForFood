@@ -1,11 +1,18 @@
-﻿@model RecipesForFood.Models.Recipe
+﻿@model IEnumerable<RecipesForFood.Models.Recipe>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
 </head>
 <body>
-    <h1>@Model.Name</h1>
-    <div>The ID value is @Model.Id</div>
+    <table>
+        @foreach (var recipe in Model)
+        {
+            <tr>
+                <td>@recipe.Id</td>
+                <td>@recipe.Name</td>
+            </tr>
+        }
+    </table>
 </body>
 </html>

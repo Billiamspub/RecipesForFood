@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace RecipesForFood
+namespace RecipesForFood.Services
 {
     public interface IGreeter
     {

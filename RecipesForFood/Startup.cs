@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RecipesForFood.Services;
 
 namespace RecipesForFood
 {
@@ -19,6 +20,7 @@ namespace RecipesForFood
         {
             // AddSingleton or AddTransient or AddScoped
             services.AddSingleton<IGreeter, Greeter>();
+            services.AddScoped<IRecipeData, InMemoryRestaurantData>();
             services.AddMvc();
         }
 
