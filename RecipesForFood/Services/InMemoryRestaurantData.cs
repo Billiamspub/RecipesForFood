@@ -20,6 +20,11 @@ namespace RecipesForFood.Services
             };
         }
 
+        public Recipe Get(int id)
+        {
+            return _recipes.FirstOrDefault(r => r.Id == id);
+        }
+
         public IEnumerable<Recipe> GetAll()
         {
             return _recipes.OrderBy(r => r.Name);

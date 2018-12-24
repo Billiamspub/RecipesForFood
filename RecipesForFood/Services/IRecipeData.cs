@@ -9,5 +9,6 @@ namespace RecipesForFood.Services
     public interface IRecipeData
     {
         IEnumerable<Recipe> GetAll();
+        Recipe Get(int id);
     }
 }

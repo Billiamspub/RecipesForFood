@@ -1,0 +1,13 @@
+﻿@using RecipesForFood.Models;
+@model Recipe
+
+<h1>Create</h1>
+
+<form method="post">
+    <input asp-for="Name" />
+    
+    <select asp-for="Category" asp-items="@Html.GetEnumSelectList<Categories>()">
+    </select>
+
+    <input type="submit" name="save" value="Save" />
+</form>
