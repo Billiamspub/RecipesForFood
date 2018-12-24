@@ -1,12 +1,13 @@
-﻿@model IEnumerable<RecipesForFood.Models.Recipe>
+﻿@model RecipesForFood.ViewModel.HomeIndexViewModel
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
 </head>
 <body>
+    <h1>@Model.CurrentMessage</h1>
     <table>
-        @foreach (var recipe in Model)
+        @foreach (var recipe in Model.Recipes)
         {
             <tr>
                 <td>@recipe.Id</td>
