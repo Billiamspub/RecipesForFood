@@ -1,13 +1,13 @@
-﻿using System;
+﻿using RecipesForFood.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RecipesForFood.Models
+namespace RecipesForFood.ViewModels
 {
-    public class Recipe
+    public class RecipeEditModel
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public Categories Category { get; set; }
     }
