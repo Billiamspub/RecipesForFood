@@ -1,5 +1,10 @@
-﻿@page
+﻿@page "{name}"
 
-@inject IGreeter  Greeter
+@*too busy on page? so model is suggested*@
+@*@inject IGreeter  Greeter*@
 
-<div>@DateTime.Now.Year</div>
+@*<div>@Greeter.GetTitleOfTheDay()</div>*@
+
+@model GreetingModel
+
+<div>@Model.CurrentGreeting</div>

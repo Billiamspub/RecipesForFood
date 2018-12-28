@@ -79,12 +79,12 @@ namespace RecipesForFood
             //    Path="/wp"
             //});
 
-            app.Run(async (context) =>
-            {                
-                //var appTitle = configuration["AppTitle"];
-                var appTitle = greeter.GetTitleOfTheDay();
-                await context.Response.WriteAsync($"{appTitle} : {env.EnvironmentName}");
-            });
+            //app.Run(async (context) =>
+            //{                
+            //    //var appTitle = configuration["AppTitle"];
+            //    var appTitle = greeter.GetTitleOfTheDay();
+            //    await context.Response.WriteAsync($"{appTitle} : {env.EnvironmentName}");
+            //});
         }
     }
 }
