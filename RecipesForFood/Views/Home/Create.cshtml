@@ -1,13 +1,23 @@
-﻿@using RecipesForFood.Models;
-@model Recipe
+﻿@model Recipe
+
+@{ 
+    ViewBag.Title = "Create";
+}
 
 <h1>Create</h1>
 
 <form method="post">
-    <input asp-for="Name" />
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
     
-    <select asp-for="Category" asp-items="@Html.GetEnumSelectList<Categories>()">
-    </select>
+    <div>
+        <label asp-for="Category"></label>
+        <select asp-for="Category" asp-items="@Html.GetEnumSelectList<Categories>()"></select>
+        <span asp-validation-for="Category"></span>
+    </div>
 
     <input type="submit" name="save" value="Save" />
 </form>

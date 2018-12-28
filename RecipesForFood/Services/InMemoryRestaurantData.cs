@@ -20,6 +20,13 @@ namespace RecipesForFood.Services
             };
         }
 
+        public Recipe Add(Recipe recipe)
+        {
+            recipe.Id = _recipes.Max(r => r.Id) + 1;
+            _recipes.Add(recipe);
+            return recipe;
+        }
+
         public Recipe Get(int id)
         {
             return _recipes.FirstOrDefault(r => r.Id == id);

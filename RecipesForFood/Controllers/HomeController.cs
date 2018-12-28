@@ -47,9 +47,22 @@ namespace RecipesForFood.Controllers
         }
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(RecipeEditModel model)
         {
-            return Content("POST");
+            if (ModelState.IsValid)
+            {
+                var newRecipe = new Recipe();
+                newRecipe.Name = model.Name;
+                newRecipe.Category = model.Category;
+                newRecipe = _recipeData.Add(newRecipe);
+
+                return RedirectToAction(nameof(Details), new { id = newRecipe.Id });
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

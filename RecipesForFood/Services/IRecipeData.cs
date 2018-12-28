@@ -10,5 +10,6 @@ namespace RecipesForFood.Services
     {
         IEnumerable<Recipe> GetAll();
         Recipe Get(int id);
+        Recipe Add(Recipe recipe);
     }
 }

@@ -1,23 +1,24 @@
-﻿@model RecipesForFood.ViewModels.HomeIndexViewModel
+﻿@model HomeIndexViewModel
+@{ 
+    ViewBag.Title = "Home page";
+    //Layout = "~/Views/Shared/_Layout.cshtml"; // moved to _viewstart.cshtml
+}
+<h1>All Recipes</h1>
+<table>
+    @foreach (var recipe in Model.Recipes)
+    {
+        <tr>
+            <td>@recipe.Id</td>
+            <td>@recipe.Name</td>
+            <td>
+                @*<a href="/home/details/@recipe.Id">Details</a>*@
+                <a asp-action="Details" asp-route-id="@recipe.Id">More</a>
+            </td>
+        </tr>
+    }
+</table>
+<a asp-action="Create">Add Recipe</a>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>
-    <table>
-        @foreach (var recipe in Model.Recipes)
-        {
-            <tr>
-                <td>@recipe.Id</td>
-                <td>@recipe.Name</td>
-                <td>
-                    @*<a href="/home/details/@recipe.Id">Details</a>*@
-                    <a asp-action="Details" asp-route-id="@recipe.Id">More</a>
-                </td>
-            </tr>
-        }
-    </table>
-    <a asp-action="Create">Add Restaurant</a>
-</body>
-</html>
+@section footer{ 
+    @Model.CurrentMessage
+}
