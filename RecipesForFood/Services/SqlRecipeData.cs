@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using RecipesForFood.Data;
 using RecipesForFood.Models;
 
@@ -30,6 +31,15 @@ namespace RecipesForFood.Services
         public IEnumerable<Recipe> GetAll()
         {
             return _context.Recipes.OrderBy(r => r.Name);
+        }
+
+        public Recipe Update(Recipe recipe)
+        {
+            _context.Attach(recipe).State = 
+                EntityState.Modified;
+            _context.SaveChanges();
+            return recipe;
+
         }
     }
 }

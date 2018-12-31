@@ -19,9 +19,9 @@ namespace RecipesForFood.Pages
             _greeter = greeter;
         }
 
-        public void OnGet()
+        public void OnGet(string name)
         {
-            CurrentGreeting = _greeter.GetTitleOfTheDay();
+            CurrentGreeting = $"{name} : {_greeter.GetTitleOfTheDay()}";
         }
     }
 }

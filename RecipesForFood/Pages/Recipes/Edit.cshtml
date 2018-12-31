@@ -1,0 +1,25 @@
+﻿@page "{id}"
+@using RecipesForFood.Pages.Recipes
+
+@model EditModel
+@{
+}
+
+<h1>Edit @Model.Recipe.Name</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Recipe.Id"/>
+    <div>
+        <label asp-for="Recipe.Name"></label>
+        <input asp-for="Recipe.Name" />
+        <span asp-validation-for="Recipe.Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Recipe.Category"></label>
+        <select asp-for="Recipe.Category" asp-items="@Html.GetEnumSelectList<Categories>()"></select>
+        <span asp-validation-for="Recipe.Category"></span>
+    </div>
+
+    <input type="submit" name="save" value="Save" />
+</form>

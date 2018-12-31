@@ -4,21 +4,32 @@
     //Layout = "~/Views/Shared/_Layout.cshtml"; // moved to _viewstart.cshtml
 }
 <h1>All Recipes</h1>
-<table>
+
+@foreach (var recipe in Model.Recipes)
+{
+    @Html.Partial("_Summary", recipe)
+
+}
+@*He wnated to get away from table and show partial view functionality*@
+@*<table>
     @foreach (var recipe in Model.Recipes)
     {
         <tr>
             <td>@recipe.Id</td>
             <td>@recipe.Name</td>
             <td>
-                @*<a href="/home/details/@recipe.Id">Details</a>*@
                 <a asp-action="Details" asp-route-id="@recipe.Id">More</a>
+                <a asp-page="/Recipes/Edit" asp-route-id="@recipe.Id">Edit</a>
             </td>
         </tr>
     }
-</table>
-<a asp-action="Create">Add Recipe</a>
+</table>*@
+<div>
+    <a asp-action="Create">Add Recipe</a>
+</div>
 
-@section footer{ 
+@*He wants to move this to the layout but difficult with so many models/functionality in there
+    potentially could use inject; he'd like to use View Components which is self-contained*@
+@*@section footer{ 
     @Model.CurrentMessage
-}
+}*@

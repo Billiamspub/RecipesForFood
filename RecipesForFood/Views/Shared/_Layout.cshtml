@@ -11,6 +11,9 @@
     </div>
     <footer>
         @RenderSection("footer", required:false)
+        @*He doesn't like below; he likes vc tag helper, need to register in _ViewImports.chtml*@
+        @*@await Component.InvokeAsync("Greeter")*@
+        <vc:greeter></vc:greeter>
     </footer>
 </body>
 </html>
