@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,12 +47,15 @@ namespace RecipesForFood
                 //env.EnvironmentName();
                 app.UseDeveloperExceptionPage();
             }
+            // all pages will use SSL
+            app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());
             // middleware to look at incoming request and if for a directory will look for a default file; could specify with options parameter
             //app.UseDefaultFiles();
             //// middleware for allowing static files in www
             //app.UseStaticFiles();
             // does both of above with options parameter
             //app.UseFileServer();
+
             app.UseStaticFiles();
 
             app.UseMvcWithDefaultRoute();
