@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RecipesForFood.Models;
 using RecipesForFood.Services;
 using RecipesForFood.ViewModels;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace RecipesForFood.Controllers
 {
+    [Authorize] // still need to put in Edit razor page since we have a mix of stuff
     public class HomeController : Controller
     {
         private IRecipeData _recipeData;
@@ -19,6 +21,7 @@ namespace RecipesForFood.Controllers
             _recipeData = recipeData;
             _greeter = greeter;
         }
+        [AllowAnonymous] // moved Authorize to controller but we want anyone to hit the home page;
         public IActionResult Index()
         {
             //var model = _recipeData.GetAll();
@@ -41,6 +44,8 @@ namespace RecipesForFood.Controllers
         }
 
         [HttpGet]
+        //[Authorize] // can set parameters such as Policy and Roles, Policy can check countries or department (flexible)
+        // recommends putting above on controller in order to avoid missing some
         public IActionResult Create()
         {
             return View();

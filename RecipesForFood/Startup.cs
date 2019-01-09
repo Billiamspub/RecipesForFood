@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +29,21 @@ namespace RecipesForFood
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // app.UseAuthentication(); depends on the following
+            // add defaults and set up with methods
+            // can set options in AddOpenIdConnect individually but he uses bind as 
+            // a shortcut
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            })
+            .AddOpenIdConnect(options =>
+            {
+                _configuration.Bind("AzureAd", options);
+            })
+            .AddCookie();
+
             // AddSingleton or AddTransient or AddScoped
             services.AddSingleton<IGreeter, Greeter>();
             services.AddDbContext<RecipesForFoodDBContext>(
@@ -57,6 +74,10 @@ namespace RecipesForFood
             //app.UseFileServer();
 
             app.UseStaticFiles();
+
+            app.UseNodeModules(env.ContentRootPath);
+
+            app.UseAuthentication();
 
             app.UseMvcWithDefaultRoute();
 
